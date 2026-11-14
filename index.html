@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>TerraForge — Living Virtual Earth</title>
+  <meta name="description" content="Own, develop, and trade parcels of a self-evolving virtual Earth. Generative NFTs. Native token economy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div id="boot">
+    <div class="boot-inner">
+      <div class="logo-mark">TF</div>
+      <h1>TERRAFORGE</h1>
+      <p class="tagline">Living Virtual Earth · Generative NFTs · Solo-Operated Revenue</p>
+      <p class="tagline" style="font-size:0.75rem;opacity:0.7;margin-top:0.25rem">Virtual assets only · Not real-world land · Fees → operator treasury in Settings</p>
+      <div class="boot-bar"><div class="boot-fill" id="bootFill"></div></div>
+      <p class="boot-status" id="bootStatus">Initializing spatial mesh…</p>
+      <button id="enterBtn" class="enter-btn hidden">ENTER GLOBE</button>
+    </div>
+  </div>
+
+  <canvas id="globe"></canvas>
+
+  <div id="hud" class="hidden">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-mark">TF</span>
+        <span class="brand-name">TERRAFORGE</span>
+        <span class="version">v2.0 FINAL</span>
+      </div>
+      <div class="world-status">
+        <span id="worldTime">00:00 UTC</span>
+        <span class="dot"></span>
+        <span id="activeEvent">Calm Seas</span>
+        <span class="dot"></span>
+        <span id="playerCount">— online</span>
+      </div>
+      <div class="balances">
+        <div class="bal"><span class="bal-label">$TERRA</span><span id="terraBal">0</span></div>
+        <div class="bal"><span class="bal-label">ENERGY</span><span id="energyBal">100</span></div>
+      </div>
+    </header>
+
+    <nav class="modes">
+      <button class="mode active" data-mode="explore">Explore</button>
+      <button class="mode" data-mode="claim">Claim</button>
+      <button class="mode" data-mode="forge">Forge</button>
+      <button class="mode" data-mode="market">Market</button>
+      <button class="mode" data-mode="settings">⚙</button>
+    </nav>
+
+    <aside id="panel" class="panel hidden">
+      <button id="panelClose" class="panel-close">×</button>
+      <div id="panelBody"></div>
+    </aside>
+
+    <footer class="bottom-bar">
+      <div class="stats">
+        <div><span class="k">Parcels</span><span id="statParcels">0</span></div>
+        <div><span class="k">Yield</span><span id="statYield">0</span></div>
+        <div><span class="k">Rarity</span><span id="statRarity">0</span></div>
+        <div><span class="k">Events</span><span id="statEvents">0</span></div>
+      </div>
+      <p id="hint" class="hint">Drag to orbit · Scroll to zoom · Click a marker to select</p>
+    </footer>
+
+    <div id="toasts"></div>
+    <div id="eventBanner" class="event-banner hidden"><span id="eventText"></span></div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
