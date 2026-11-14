@@ -1,8 +1,12 @@
 # TerraForge v2.0 FINAL
 
+**CLOSED SOURCE · Proprietary · All Rights Reserved**
+
 **One-click deployable · Solo-operated · Revenue to your wallet · No admin team**
 
 Self-sufficient virtual Earth: 3D globe, generative NFTs, marketplace, $TERRA sinks, self-corrective economy, self-expanding world. **Bots and rules run the product.** You set the treasury wallet and host the static files.
+
+> This repository is **private / closed source**. Not licensed for public use, forking, or redistribution.
 
 ## One-click deploy
 
@@ -11,9 +15,7 @@ python3 -m http.server 8765
 # → http://localhost:8765
 ```
 
-**Cloud (no build):** Netlify drag-drop · Cloudflare Pages · Vercel · S3/R2
-
-Repo: https://github.com/tmuhlhausen/terraforge
+**Cloud (no build):** Netlify / Cloudflare Pages / Vercel from **private** Git, or drag-drop folder.
 
 ## Revenue in 60 seconds
 
@@ -39,4 +41,4 @@ TerraForge.sim.treasury
 | Self-corrective + self-expanding | Live |
 | Admin / mod team | **Not required** |
 
-See OPERATOR.md and LEGAL.md.
+See OPERATOR.md, LEGAL.md, and LICENSE.
