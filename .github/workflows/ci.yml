@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: terraforge
+          POSTGRES_PASSWORD: terraforge_ci_only
+          POSTGRES_DB: terraforge_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U terraforge -d terraforge_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Check JavaScript syntax
+        run: npm test
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client
+      - name: Apply platform schema
+        env:
+          PGPASSWORD: terraforge_ci_only
+        run: |
+          psql "postgresql://terraforge@localhost:5432/terraforge_test" \
+            --set ON_ERROR_STOP=1 \
+            --file database/migrations/001_platform_core.sql
+      - name: Verify schema invariants
+        env:
+          PGPASSWORD: terraforge_ci_only
+        run: |
+          psql "postgresql://terraforge@localhost:5432/terraforge_test" \
+            --set ON_ERROR_STOP=1 \
+            --file database/tests/001_platform_core_assertions.sql
