@@ -1,5 +1,5 @@
 /**
- * TerraForge v2.0 FINAL — Self-sufficient release
+ * TerraForge v2.1 EXPANSION — Self-sufficient release
  * Self-reliant · self-expanding · self-corrective · tokenized · NFT marketplace
  * Platform fees → operator treasury wallet (Settings)
  */
@@ -53,9 +53,9 @@ function startApp() {
 
   ui.refreshStats();
   if (!sim.treasury.wallet) {
-    ui.toast("Set your treasury wallet in Settings (⚙) — fees pay there");
+    ui.toast("Set your treasury wallet in Settings (⚙) — fees are simulated only; no funds transfer");
   } else {
-    ui.toast("TerraForge FINAL · Treasury active");
+    ui.toast("Treasury configured · local simulation only");
   }
 
   setInterval(() => sim.step(), 900);
@@ -70,7 +70,7 @@ function startApp() {
   requestAnimationFrame(frame);
 
   window.TerraForge = {
-    version: "2.0.0-final",
+    version: "2.1.0-expansion",
     sim,
     globe,
     ui,
