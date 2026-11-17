@@ -3,6 +3,7 @@
 BEGIN;
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TYPE account_status AS ENUM ('pending','active','suspended','closed');
 CREATE TYPE asset_status AS ENUM ('draft','owned','listed','burned');
@@ -187,7 +188,7 @@ BEGIN
   RETURN NULL;
 END $$;
 CREATE CONSTRAINT TRIGGER ledger_journal_must_balance
-AFTER INSERT OR UPDATE OR DELETE ON ledger_entries
+AFTER INSERT ON ledger_entries
 DEFERRABLE INITIALLY DEFERRED
 FOR EACH ROW EXECUTE FUNCTION terraforge_assert_balanced_journal();
 
@@ -204,5 +205,14 @@ CREATE TABLE idempotency_records (
   UNIQUE(scope,idempotency_key)
 );
 CREATE INDEX idempotency_expiry ON idempotency_records(expires_at);
+
+-- Ledger entries are append-only. Corrections use compensating journals.
+CREATE FUNCTION terraforge_ledger_entries_immutable() RETURNS trigger LANGUAGE plpgsql AS $
+BEGIN
+  RAISE EXCEPTION 'Ledger entries are immutable; post a compensating journal instead.';
+END $;
+CREATE TRIGGER ledger_entries_no_mutation
+BEFORE UPDATE OR DELETE ON ledger_entries
+FOR EACH ROW EXECUTE FUNCTION terraforge_ledger_entries_immutable();
 
 COMMIT;
