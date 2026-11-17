@@ -1,7 +1,6 @@
 /**
- * TerraForge v2.0 FINAL — Self-sufficient release
- * Self-reliant · self-expanding · self-corrective · tokenized · NFT marketplace
- * Platform fees → operator treasury wallet (Settings)
+ * TerraForge v2.2 — commercial platform preview
+ * Local virtual-world simulation only. No real payments or NFT minting.
  */
 import { TerraSim } from "./sim.js";
 import { GlobeView } from "./globe.js";
@@ -14,14 +13,14 @@ const boot = document.getElementById("boot");
 const hud = document.getElementById("hud");
 
 const stages = [
-  [10, "Bootstrapping self-managed core…"],
+  [10, "Bootstrapping preview…"],
   [22, "Loading spatial mesh & biomes…"],
-  [38, "Seeding Location DNA registry…"],
-  [52, "Binding NFT mint & marketplace…"],
-  [66, "Wiring treasury fee router…"],
-  [80, "Enabling self-corrective economy…"],
-  [92, "Arming frontier self-expansion…"],
-  [100, "TerraForge FINAL online"],
+  [38, "Generating virtual parcel registry…"],
+  [52, "Preparing local collectible forge…"],
+  [66, "Initializing demo economy…"],
+  [80, "Loading local world state…"],
+  [92, "Preparing globe interaction…"],
+  [100, "TerraForge preview ready"],
 ];
 
 async function bootSequence() {
@@ -52,11 +51,7 @@ function startApp() {
   const ui = new UI(sim, globe);
 
   ui.refreshStats();
-  if (!sim.treasury.wallet) {
-    ui.toast("Set your treasury wallet in Settings (⚙) — fees pay there");
-  } else {
-    ui.toast("TerraForge FINAL · Treasury active");
-  }
+  ui.toast("Preview mode: progress is stored only in this browser. No purchases, transfers or NFTs are active.");
 
   setInterval(() => sim.step(), 900);
 
@@ -70,13 +65,13 @@ function startApp() {
   requestAnimationFrame(frame);
 
   window.TerraForge = {
-    version: "2.0.0-final",
+    version: "2.2.0-preview",
     sim,
     globe,
     ui,
     help() {
-      console.log(`TerraForge v2 FINAL API\n  TerraForge.sim.setTreasuryWallet(\"0xYourWallet\")\n  TerraForge.sim.claim(id)\n  TerraForge.sim.treasury`);
+      console.log("TerraForge preview API: local simulation only; no production services are connected.");
     },
   };
-  console.log("%cTerraForge v2.0 FINAL", "color:#00f0ff;font-size:14px;font-weight:bold");
+  console.log("%cTerraForge v2.2 PREVIEW", "color:#00f0ff;font-size:14px;font-weight:bold");
 }

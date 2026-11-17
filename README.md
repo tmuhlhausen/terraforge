@@ -1,44 +1,36 @@
-# TerraForge v2.0 FINAL
+# TerraForge
 
-**CLOSED SOURCE · Proprietary · All Rights Reserved**
+**Proprietary virtual-world platform · Browser prototype · Expansion branch**
 
-**One-click deployable · Solo-operated · Revenue to your wallet · No admin team**
+TerraForge is a stylized virtual Earth where players explore parcels, develop locations and create collectible assets. Parcels represent virtual game-world items only. They are not real-world land, property rights or investment products.
 
-Self-sufficient virtual Earth: 3D globe, generative NFTs, marketplace, $TERRA sinks, self-corrective economy, self-expanding world. **Bots and rules run the product.** You set the treasury wallet and host the static files.
+## Run locally
 
-> This repository is **private / closed source**. Not licensed for public use, forking, or redistribution.
-
-## One-click deploy
+Requires an internet connection for the Three.js module and web fonts.
 
 ```bash
 python3 -m http.server 8765
-# → http://localhost:8765
+# open http://localhost:8765
 ```
 
-**Cloud (no build):** Netlify / Cloudflare Pages / Vercel from **private** Git, or drag-drop folder.
+## Current prototype capabilities
 
-## Revenue in 60 seconds
+- Three.js globe with generated parcel markers
+- Local parcel claiming, upgrading and maintenance
+- Local collectible forge and marketplace listing records
+- Local treasury address configuration and simulated fee ledger
+- Browser-local save state
 
-1. Enter globe
-2. **Settings (⚙)**
-3. **Treasury wallet** = your **company** address
-4. Save
+**Prototype boundary:** state is stored in localStorage and can be edited by the user. It is not shared between users. Collectibles are not on-chain NFTs. Listings do not settle trades. The treasury address does not receive funds. No real payment provider or blockchain integration is active.
 
-```js
-TerraForge.sim.setTreasuryWallet("0x…")
-TerraForge.sim.treasury
-```
+## Platform expansion
 
-## What ships
+See [PLATFORM-EXPANSION.md](PLATFORM-EXPANSION.md) for the scalable architecture, product roadmap and security gates. See [PAYMENTS-NFT-IMPLEMENTATION.md](PAYMENTS-NFT-IMPLEMENTATION.md) for the server-side integration contract.
 
-| System | Status |
-|--------|--------|
-| 3D globe + parcels | Live |
-| Claim / upgrade / maintain | Live |
-| NFT forge | Live |
-| Marketplace | Live |
-| Treasury fee router | Live |
-| Self-corrective + self-expanding | Live |
-| Admin / mod team | **Not required** |
+## Production requirements
 
-See OPERATOR.md, LEGAL.md, and LICENSE.
+Real monetization requires authenticated APIs, a database, transactional order/ledger processing, a hosted checkout provider, verified webhooks, and independently audited smart contracts before enabling real NFT minting or crypto settlement. Never put provider secrets or private keys in browser code.
+
+## Legal and licensing
+
+This repository is proprietary. See [LICENSE](LICENSE) and [LEGAL.md](LEGAL.md). Virtual parcels are not real-world land. Obtain legal, tax, privacy and consumer-protection advice before public monetization.
