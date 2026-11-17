@@ -120,6 +120,7 @@ CREATE TABLE orders (
 );
 CREATE INDEX orders_buyer_history ON orders(buyer_user_id,created_at DESC);
 CREATE INDEX orders_seller_history ON orders(seller_user_id,created_at DESC);
+ALTER TABLE parcel_ownership ADD CONSTRAINT parcel_ownership_source_order_fk FOREIGN KEY (source_order_id) REFERENCES orders(id) ON DELETE RESTRICT;
 
 CREATE TABLE payments (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -154,9 +155,9 @@ CREATE TABLE ledger_accounts (
   owner_user_id uuid REFERENCES users(id) ON DELETE RESTRICT,
   code text NOT NULL,
   currency char(3) NOT NULL CHECK (currency ~ '^[A-Z]{3}$'),
-  created_at timestamptz NOT NULL DEFAULT now(),
-  UNIQUE(owner_user_id,code,currency)
+  created_at timestamptz NOT NULL DEFAULT now()
 );
+CREATE UNIQUE INDEX ledger_account_identity ON ledger_accounts(COALESCE(owner_user_id,'00000000-0000-0000-0000-000000000000'::uuid),code,currency);
 CREATE TABLE ledger_journals (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   order_id uuid REFERENCES orders(id) ON DELETE RESTRICT,
